@@ -1,0 +1,50 @@
+{
+  "global_must_not_include": ["DIVERS-001", "DIVERS-002", "REN-004"],
+  "requests": {
+    "01_complete.txt": {
+      "must_include": [],
+      "must_not_include": ["PLOMB-001", "PLOMB-002"],
+      "needs_manual_pricing": true
+    },
+    "02_vague.txt": {
+      "must_include": [],
+      "must_not_include": ["CAR-003", "PLOMB-004"],
+      "needs_manual_pricing": true
+    },
+    "03_urgent.txt": {
+      "must_include": ["PLOMB-003"],
+      "must_not_include": [],
+      "needs_manual_pricing": false
+    },
+    "04_two_works.txt": {
+      "must_include": ["PEINT-002", "PEINT-003"],
+      "must_not_include": ["PEINT-001", "ELEC-003"],
+      "needs_manual_pricing": true
+    },
+    "05_no_contact.txt": {
+      "must_include": [],
+      "must_not_include": ["CAR-003"],
+      "needs_manual_pricing": true
+    },
+    "06_sms.txt": {
+      "must_include": ["PLOMB-003"],
+      "must_not_include": [],
+      "needs_manual_pricing": false
+    },
+    "08_long_email.txt": {
+      "must_include": ["REN-001", "REN-002"],
+      "must_not_include": ["REN-003"],
+      "needs_manual_pricing": true
+    },
+    "09_for_someone_else.txt": {
+      "must_include": [],
+      "must_not_include": [],
+      "needs_manual_pricing": true
+    },
+    "10_english.txt": {
+      "must_include": ["PEINT-002"],
+      "must_not_include": ["PEINT-001"],
+      "needs_manual_pricing": false
+    }
+  }
+}

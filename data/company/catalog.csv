@@ -1,0 +1,22 @@
+﻿item_id;service_name;category;unit;unit_price_ht_eur;vat_rate_percent;conditions
+PEINT-001;Préparation des murs (protection, rebouchage léger);Peinture;m²;4.5;20;"Préparation standard ; réparations importantes sur devis"
+PEINT-002;Application peinture intérieure, 2 couches;Peinture;m²;18.0;20;"Peinture standard ; support sain et préparé"
+PEINT-003;Application peinture plafond, 2 couches;Peinture;m²;21.0;20;Hauteur standard jusqu’à 2,8 m
+PEINT-004;Ponçage et finition de boiseries;Peinture;ml;12.0;20;Hors remplacement des éléments
+PLOMB-001;Remplacement robinet standard (main-d’œuvre);Plomberie;unité;65.0;20;"Robinet fourni par le client ; fourniture en supplément"
+PLOMB-002;Remplacement mécanisme de chasse d’eau (main-d’œuvre);Plomberie;unité;75.0;20;Pièce non comprise
+PLOMB-003;Recherche et réparation petite fuite accessible;Plomberie;heure;58.0;20;Hors pièces et travaux destructifs
+PLOMB-004;Pose lavabo et raccordements;Plomberie;unité;145.0;20;Lavabo et robinetterie non compris
+ELEC-001;Remplacement prise ou interrupteur;Électricité;unité;38.0;20;Matériel standard non compris
+ELEC-002;Pose point lumineux simple;Électricité;unité;55.0;20;Hors création de ligne ou modification du tableau
+ELEC-003;Diagnostic électrique;Électricité;forfait;95.0;20;"Diagnostic visuel et tests usuels ; rapport détaillé en supplément"
+ELEC-004;Installation circuit dédié;Électricité;unité;180.0;20;Après vérification de faisabilité sur site
+CAR-001;Pose plinthe;Menuiserie;ml;14.0;20;Plinthe fournie par le client
+CAR-002;Réglage porte intérieure;Menuiserie;unité;48.0;20;Hors remplacement de serrure ou quincaillerie
+CAR-003;Pose meuble en kit;Menuiserie;heure;45.0;20;Montage selon notice et accessibilité
+REN-001;Dépose revêtement mural ou sol;Rénovation;m²;12.0;20;Évacuation des déchets non comprise
+REN-002;Pose carrelage mural ou sol;Rénovation;m²;42.0;20;Carrelage, colle et joints non compris
+REN-003;Pose sol stratifié;Rénovation;m²;25.0;20;Revêtement et sous-couche non compris
+REN-004;Petites reprises / finitions diverses;Rénovation;heure;42.0;20;Après validation du périmètre
+DIVERS-001;Déplacement zone locale;Frais;forfait;25.0;20;"Zone locale de démonstration ; à adapter selon adresse"
+DIVERS-002;Main-d’œuvre supplémentaire;Frais;heure;45.0;20;Uniquement après accord du client

@@ -1,0 +1,53 @@
+{
+  "01_complete.txt": {
+    "name": "Julien Martin",
+    "email": "julien.martin@example.com",
+    "phone": "06 12 34 56 78",
+    "work_types": ["plomberie"],
+    "missing_fields": []
+  },
+  "02_vague.txt": {
+    "work_types": [],
+    "missing_fields": ["name", "phone", "email", "site_address", "availability", "work_types"]
+  },
+  "03_urgent.txt": {
+    "name": "Sophie Bernard",
+    "phone": "07 98 76 54 32",
+    "work_types": ["plomberie"],
+    "urgency": "urgent",
+    "missing_fields": ["email"]
+  },
+  "04_two_works.txt": {
+    "name": "Famille Rousseau",
+    "email": "rousseau.famille@example.com",
+    "work_types": ["peinture", "electricite"],
+    "missing_fields": ["phone"]
+  },
+  "05_no_contact.txt": {
+    "work_types": ["menuiserie"],
+    "missing_fields": ["name", "phone", "email"]
+  },
+  
+    "06_sms.txt": {
+    "name": "Karim",
+    "phone": "0612345678",
+    "work_types": ["plomberie"],
+    "missing_fields": ["email"]
+  },
+    "07_not_a_request.txt": {
+    "is_quote_request": false,
+    "missing_fields": []
+  },
+  "08_long_email.txt": {
+    "name": "Nadia Leclerc",
+    "email": "nadia.leclerc@example.com",
+    "phone": "04 76 12 34 56",
+    "missing_fields": []
+  },
+   "10_english.txt": {
+    "name": "Tom Wilson",
+    "phone": "06 11 22 33 44",
+    "work_types": ["peinture"],
+    "missing_fields": ["email", "availability"]
+  }
+}
