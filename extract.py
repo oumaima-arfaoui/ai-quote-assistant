@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from langchain_aws import ChatBedrockConverse
 from langchain_core.prompts import ChatPromptTemplate
 
-from schema import QuoteRequest
+from schema import QuoteRequest, WorkType
 
 load_dotenv()
 
@@ -34,6 +34,10 @@ prompt = ChatPromptTemplate.from_messages([
      "leave name empty. Greetings such as 'Bonjour' or 'Salut' are not names.\n"
      "- description: always write a short French summary of the work requested, "
      "including useful details such as surface area, quantities and materials.\n"
+     "- surface_m2: a number of square metres, only if an area is explicitly written in the message "
+     "(for example 'maison de 90 m²' or 'environ 12 m2'). Write the number only. "
+     "Never compute or guess an area from a number of rooms or other details. "
+     "Leave it empty if no area is written.\n"
      "- availability: include any time frame the person gives for the work or the visit, "
      "for example 'aujourd'hui ou demain' or 'en janvier'.\n"
      "- work_types: deduce the type(s) of work from the request, even if the type is not named "
@@ -51,6 +55,11 @@ prompt = ChatPromptTemplate.from_messages([
 
 chain = prompt | structured_llm
 REQUIRED_FIELDS = ["name", "phone", "email", "site_address", "availability"]
+# extra fields required for some kinds of work
+REQUIRED_BY_WORK = {
+    WorkType.PAINTING: ["surface_m2"],
+    WorkType.RENOVATION: ["surface_m2"],
+}
 
 
 def compute_missing(request: QuoteRequest) -> list[str]:
@@ -60,6 +69,10 @@ def compute_missing(request: QuoteRequest) -> list[str]:
     missing = [f for f in REQUIRED_FIELDS if not getattr(request, f)]
     if not request.work_types:
         missing.append("work_types")
+    for work_type in request.work_types:
+        for field in REQUIRED_BY_WORK.get(work_type, []):
+            if not getattr(request, field) and field not in missing:
+                missing.append(field)
     return missing
 QUESTIONS = {
     "name": "Pouvez-vous nous indiquer vos nom et prénom ?",
@@ -68,6 +81,7 @@ QUESTIONS = {
     "site_address": "Quelle est l'adresse complète du chantier ?",
     "availability": "Quand souhaitez-vous que les travaux soient réalisés, et à quels horaires êtes-vous disponible ?",
     "work_types": "Pouvez-vous préciser la nature des travaux souhaités (plomberie, électricité, peinture, menuiserie, rénovation...) ?",
+    "surface_m2": "Quelle est la surface concernée par les travaux (en m²) ?",
 }
 
 

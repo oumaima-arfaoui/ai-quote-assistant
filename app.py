@@ -1,5 +1,7 @@
 import json
+from datetime import datetime
 
+from pipeline import process_text
 import pandas as pd
 import streamlit as st
 from conditions import answer_from_articles, find_conditions
@@ -49,6 +51,18 @@ with st.sidebar:
         for n, title, text in result["articles"]:
             with st.expander(f"Article {n} : {title}"):
                 st.write(text)
+    with st.expander("Nouvelle demande"):
+        new_text = st.text_area("Collez le message du client", height=150, key="new_request_text")
+    if st.button("Analyser la demande", key="new_request_btn"):
+        source_name = datetime.now().strftime("web_%Y%m%d_%H%M%S.txt")
+        try:
+            with st.spinner("Analyse en cours..."):
+                result = process_text(source_name, new_text)
+            st.success(f"{source_name} : {result}")
+        except ValueError as e:
+            st.error(str(e))
+        except Exception as e:
+            st.error(f"L'analyse a échoué : {e}")
 rows = [dict(row) for row in list_requests()]
 
 if not rows:
@@ -75,6 +89,7 @@ else:
     selected_id = st.selectbox("Choisir une demande", list(labels), format_func=lambda i: labels[i])
 
     request = get_request(selected_id)
+    record = QuoteRequest.model_validate_json(request["record_json"])
     left, right = st.columns(2)
     with left:
         st.subheader("Message d'origine")
@@ -85,11 +100,13 @@ else:
 
     st.divider()
     st.subheader("Réponse proposée au prospect")
-    if request["draft_reply"]:
+    if request["draft_reply"] or record.is_quote_request:
         saved_reply = get_final_reply(request["source_file"])
+        if not request["draft_reply"] and not saved_reply:
+            st.warning("La réponse automatique n'a pas pu être générée : rédigez-la à la main.")
         reply_text = st.text_area(
             "Brouillon (modifiable)",
-            value=saved_reply or request["draft_reply"],
+            value=saved_reply or request["draft_reply"] or "",
             height=300,
             key=f"reply_{selected_id}",
         )
@@ -97,14 +114,14 @@ else:
             st.caption("Une version modifiée a été enregistrée.")
         if st.button("Enregistrer la réponse", key=f"save_reply_{selected_id}"):
             save_final_reply(request["source_file"], reply_text)
-            log_correction(request["source_file"], "reply", request["draft_reply"], reply_text)
+            log_correction(request["source_file"], "reply", request["draft_reply"] or "", reply_text)
             st.success("Réponse enregistrée.")
     else:
         st.info("Pas de réponse : ce message n'est pas une demande de devis.")
 
     st.divider()
     st.subheader("Devis brouillon")
-    record = QuoteRequest.model_validate_json(request["record_json"])
+    
 
     if not record.is_quote_request:
         st.info("Pas de devis : ce message n'est pas une demande de devis.")

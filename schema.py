@@ -33,6 +33,10 @@ class QuoteRequest(BaseModel):
     site_address: Optional[str] = Field(None, description="Address of the work site")
     work_types: list[WorkType] = Field(default_factory=list, description="Types of work requested")
     description: Optional[str] = Field(None, description="Short summary of the need")
+    surface_m2: Optional[float] = Field(
+        None,
+        description="Area in square metres explicitly written in the message (room, home or surface to treat). Null if no area is given.",
+    )
 
     # Timing
     urgency: Urgency = Field(Urgency.UNKNOWN, description="Urgency level")

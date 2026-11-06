@@ -1,22 +1,18 @@
-# Virtual environment
-.venv/
-venv/
-
-# Environment variables and API keys
+# secrets
 .env
-.env.*
-!.env.example
 
-# Python cache
+# environment and caches
+.venv/
 __pycache__/
-*.pyc
+.pytest_cache/
 
-# IDE
+# generated data, rebuilt by the scripts
+data/agent.db
+data/chroma/
+data/*.html
+data/expected_match.draft.json
+
+# editors and system files
 .vscode/
-
-# Logs
-*.log
-
-# OS
-.DS_Store
+.idea/
 Thumbs.db
